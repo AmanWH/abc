@@ -1,0 +1,73 @@
+using System;
+using System.Web.UI;
+
+namespace CalculatorDemo
+{
+    public partial class Calculator : Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Calculate('+');
+        }
+
+        protected void btnSubtract_Click(object sender, EventArgs e)
+        {
+            Calculate('-');
+        }
+
+        protected void btnMultiply_Click(object sender, EventArgs e)
+        {
+            Calculate('*');
+        }
+
+        protected void btnDivide_Click(object sender, EventArgs e)
+        {
+            Calculate('/');
+        }
+
+        private void Calculate(char operation)
+        {
+            try
+            {
+                double num1 = double.Parse(txtNumber1.Text);
+                double num2 = double.Parse(txtNumber2.Text);
+                double result = 0;
+
+                switch (operation)
+                {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 != 0)
+                        {
+                            result = num1 / num2;
+                        }
+                        else
+                        {
+                            lblResult.Text = "Error: Cannot divide by zero.";
+                            return;
+                        }
+                        break;
+                }
+
+                lblResult.Text = "Result: " + result.ToString();
+            }
+            catch (Exception ex)
+            {
+                lblResult.Text = "Error: " + ex.Message;
+            }
+        }
+    }
+}
+'
